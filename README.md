@@ -6,6 +6,7 @@ Daftar isi
 # Spring Framework
 
 ## sub menu 1
+1. Syntax `System.out.println(hello + "txt")`
 	
 ## sub menu 2
 
