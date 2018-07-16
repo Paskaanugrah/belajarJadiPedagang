@@ -19,8 +19,6 @@ Konsepnya adalah menggunakan JSP (Java Server Page) dan Servlet.`JSP` digunakan 
 	}
 	```
 ## Referensi
-1. [Youtube Spring Boot](https://www.youtube.com/watch?v=msXL2oDexqw&list=PLqq-6Pq4lTTbx8p2oCgcAQGQyqN8XeA1x)
-
 
 # PostgreSQL
 
@@ -28,4 +26,4 @@ Konsepnya adalah menggunakan JSP (Java Server Page) dan Servlet.`JSP` digunakan 
 
 # REST-API
 
-# AJAX
+# Java Spring MVC :'v
