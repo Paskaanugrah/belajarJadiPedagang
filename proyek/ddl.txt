@@ -1,10 +1,15 @@
-create table 'email_sender' (
-	id serial primary key,
+// serial = int4
+// bigserial = int8
+
+create table email_sender (
+	id bigserial primary key,
 	email varchar(30) not null,
 	password varchar(30) not null,
 	host varchar(30) not null,
+	Port int4 not null,
 	isSSL boolean not null
 );
+
 
 
 DDL - EMAIL HISTORY
