@@ -1,0 +1,7 @@
+create table 'email_sender' (
+	id serial primary key,
+	email varchar(30) not null,
+	password varchar(30) not null,
+	host varchar(30) not null,
+	isSSL boolean not null
+);
