@@ -31,15 +31,17 @@ CREATE TABLE public.email_sender (
 
 
 
-
-
+EDIT TABLE email_template_category
+=====================================
+ALTER TABLE public.email_template_category ALTER COLUMN id TYPE int8 USING id::int8 ;
+ALTER TABLE public.email_template_category ADD description varchar(255) NULL ;
+ALTER TABLE public.email_template_category ALTER COLUMN active SET DEFAULT true ;
 
 
 DDL - EMAIL HISTORY
-=================================
-CREATE SEQUENCE email_history_id_seq;
+=====================================
 CREATE TABLE public.email_history (
-	id int4 NOT NULL DEFAULT nextval('email_history_id_seq'::regclass),
+	id int8 NOT NULL DEFAULT nextval('email_history_id_seq'::regclass),
 	to_recipient varchar(255) NOT NULL,
 	bcc text NULL,
 	cc text NULL,
@@ -47,8 +49,13 @@ CREATE TABLE public.email_history (
 	body text NULL,
 	sent_date date NOT NULL,
 	sent_time time NOT NULL,
-	email_template_category_id int4 NULL,
-	sender_id int4 NOT NULL,
+	email_template_category_id int8 NULL,
+	sender_id int8 NOT NULL,
 	is_sent bool NOT NULL,
-	CONSTRAINT email_history_pk PRIMARY KEY (id)
-);
+	CONSTRAINT email_history_pk PRIMARY KEY (id),
+	CONSTRAINT email_history_email_sender_fk FOREIGN KEY (sender_id) REFERENCES public.email_sender(id),
+	CONSTRAINT email_history_email_template_category_fk FOREIGN KEY (email_template_category_id) REFERENCES public.email_template_category(id) ON DELETE CASCADE ON UPDATE CASCADE
+)
+WITH (
+	OIDS=FALSE
+) ;
