@@ -5,3 +5,22 @@ create table 'email_sender' (
 	host varchar(30) not null,
 	isSSL boolean not null
 );
+
+
+DDL - EMAIL HISTORY
+=================================
+CREATE SEQUENCE email_history_id_seq;
+CREATE TABLE public.email_history (
+	id int4 NOT NULL DEFAULT nextval('email_history_id_seq'::regclass),
+	to_recipient varchar(255) NOT NULL,
+	bcc text NULL,
+	cc text NULL,
+	subject varchar(255) NOT NULL,
+	body text NULL,
+	sent_date date NOT NULL,
+	sent_time time NOT NULL,
+	email_template_category_id int4 NULL,
+	sender_id int4 NOT NULL,
+	is_sent bool NOT NULL,
+	CONSTRAINT email_history_pk PRIMARY KEY (id)
+);
