@@ -2,34 +2,21 @@
 // bigserial = int8
 
 DDL - Email Sender
---------Cara Serial---------------
-create table email_sender (
-	id bigserial primary key,
-	email varchar(30) not null,
-	password varchar(30) not null,
-	host varchar(30) not null,
-	Port int4 not null,
-	isSSL boolean not null
-);
 
 ------------------------------------
 --------Cara Sequence---------------
-
-
 
 CREATE SEQUENCE email_sender_id_seq;
 
 CREATE TABLE public.email_sender (
 	id int8 NOT NULL DEFAULT nextval('email_sender_id_seq'::regclass),
-	email varchar(30) NOT NULL,
-	"password" varchar(30) NOT NULL,
-	host varchar(30) NOT NULL,
+	email varchar(255) NOT NULL,
+	password varchar(255) NOT NULL,
+	host varchar(255) NOT NULL,
 	port int4 NOT NULL,
-	isssl bool NOT NULL,
+	is_ssl bool NOT NULL,
 	CONSTRAINT email_sender_pkey PRIMARY KEY (id)
 )
-
-
 
 EDIT TABLE email_template_category
 =====================================
