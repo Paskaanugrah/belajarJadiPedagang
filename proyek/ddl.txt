@@ -27,6 +27,7 @@ ALTER TABLE public.email_template_category ALTER COLUMN active SET DEFAULT true 
 
 DDL - EMAIL HISTORY
 =====================================
+CREATE SEQUENCE email_history_id_seq;
 CREATE TABLE public.email_history (
 	id int8 NOT NULL DEFAULT nextval('email_history_id_seq'::regclass),
 	to_recipient varchar(255) NOT NULL,
