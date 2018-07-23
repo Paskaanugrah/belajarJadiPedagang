@@ -47,3 +47,28 @@ CREATE TABLE public.email_history (
 WITH (
 	OIDS=FALSE
 ) ;
+
+
+EDIT TABLE email_template
+========================================
+ALTER TABLE public.email_template DROP CONSTRAINT email_template_type_id_fkey ;
+
+ALTER TABLE public.email_template DROP COLUMN tenant_type_id ;
+ALTER TABLE public.email_template DROP COLUMN active ;
+ALTER TABLE public.email_template ADD sender_id int8 NULL ;
+ALTER TABLE public.email_template ADD created_date date NULL ;
+ALTER TABLE public.email_template ADD CONSTRAINT email_template_email_sender_fk FOREIGN KEY (sender_id) REFERENCES public.email_sender(id) ;
+
+EDIT email_recipient
+========================================
+ALTER TABLE public.email_recipient DROP CONSTRAINT email_recipient_customer_id_fkey ;
+ALTER TABLE public.email_recipient DROP CONSTRAINT email_recipient_period_type_id_fkey ;
+ALTER TABLE public.email_recipient DROP COLUMN customer_id ;
+ALTER TABLE public.email_recipient DROP COLUMN initial_date ;
+ALTER TABLE public.email_recipient DROP COLUMN delivery_date ;
+ALTER TABLE public.email_recipient DROP COLUMN period_duration ;
+ALTER TABLE public.email_recipient DROP COLUMN period_type_id ;
+ALTER TABLE public.email_recipient DROP COLUMN active ;
+ALTER TABLE public.email_recipient ADD customer_cp_id int8 NOT NULL ;
+ALTER TABLE public.email_recipient ADD CONSTRAINT email_recipient_customer_cp_fk FOREIGN KEY (customer_cp_id) REFERENCES public.customer_cp(id) ;
+
