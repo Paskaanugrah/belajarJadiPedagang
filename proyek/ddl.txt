@@ -6,6 +6,11 @@ DDL - Email Sender
 ------------------------------------
 --------Cara Sequence---------------
 
+---Reset Sequence---
+alter sequence public.email_sender_id_seq restart with 1;
+
+DDL - Email Sender
+=======================================
 CREATE SEQUENCE email_sender_id_seq;
 
 CREATE TABLE public.email_sender (
