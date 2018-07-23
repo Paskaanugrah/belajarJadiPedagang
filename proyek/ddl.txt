@@ -6,6 +6,11 @@ DDL - Email Sender
 ------------------------------------
 --------Cara Sequence---------------
 
+---Reset Sequence---
+alter sequence public.email_sender_id_seq restart with 1;
+
+DDL - Email Sender
+=======================================
 CREATE SEQUENCE email_sender_id_seq;
 
 CREATE TABLE public.email_sender (
@@ -14,7 +19,7 @@ CREATE TABLE public.email_sender (
 	password varchar(255) NOT NULL,
 	host varchar(255) NOT NULL,
 	port int4 NOT NULL,
-	is_ssl bool NOT NULL,
+	ssl bool NOT NULL,
 	CONSTRAINT email_sender_pkey PRIMARY KEY (id)
 )
 
