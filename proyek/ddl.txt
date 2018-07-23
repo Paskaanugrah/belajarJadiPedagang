@@ -39,7 +39,7 @@ CREATE TABLE public.email_history (
 	sent_time time NOT NULL,
 	email_template_category_id int8 NULL,
 	sender_id int8 NOT NULL,
-	is_sent bool NOT NULL,
+	sent bool NOT NULL DEFAULT FALSE,
 	CONSTRAINT email_history_pk PRIMARY KEY (id),
 	CONSTRAINT email_history_email_sender_fk FOREIGN KEY (sender_id) REFERENCES public.email_sender(id),
 	CONSTRAINT email_history_email_template_category_fk FOREIGN KEY (email_template_category_id) REFERENCES public.email_template_category(id) ON DELETE CASCADE ON UPDATE CASCADE
