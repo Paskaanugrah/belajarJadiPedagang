@@ -1,7 +1,0 @@
-{
-        "email": "cobapaska@gmail.com",
-        "password": "cobapaska123",
-        "host": "smtp.gmail.com",
-        "port": 465,
-        "ssl": true
-    }
