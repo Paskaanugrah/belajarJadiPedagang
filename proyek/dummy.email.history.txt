@@ -1,0 +1,9 @@
+{
+	"toRecipient" : "oeyeoy@gmail.com",
+	"bcc" : "paskaadil@gmail.com",
+	"cc" : "ulfaintania1@gmail.com",
+	"subject" : "#4 ini tlssssssss -  Coba send e-mail",
+	"body" : "yeay berhasil!!",
+	"emailTemplateCategoryId" : 1,
+	"senderId" : 4
+}

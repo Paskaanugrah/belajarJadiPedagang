@@ -1,0 +1,9 @@
+{
+	"templateName" : "Nama Template",
+	"subject" : "Ceritanya ini subject",
+	"body" : "hehe kalo ini body",
+	"emailTemplateCategoryId" : 1,
+	"senderId" : 4,
+	"appId" : 1
+	"recipient" : "paskaadil@gmail.com;oeyeoy@gmail.com;ulfaintania1@gmail.com;muhammad.rohman.irfanuddin09@gmail.com;"
+}
