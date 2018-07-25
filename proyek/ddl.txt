@@ -1,13 +1,9 @@
-// serial = int4
-// bigserial = int8
-
-DDL - Email Sender
-
-------------------------------------
---------Cara Sequence---------------
+DDL
 
 ---Reset Sequence---
 alter sequence public.email_sender_id_seq restart with 1;
+
+----------------------------
 
 DDL - Email Sender
 =======================================
@@ -16,12 +12,19 @@ CREATE SEQUENCE email_sender_id_seq;
 CREATE TABLE public.email_sender (
 	id int8 NOT NULL DEFAULT nextval('email_sender_id_seq'::regclass),
 	email varchar(255) NOT NULL,
-	password varchar(255) NOT NULL,
+	password text NOT NULL,
 	host varchar(255) NOT NULL,
 	port int4 NOT NULL,
 	ssl bool NOT NULL,
 	CONSTRAINT email_sender_pkey PRIMARY KEY (id)
 )
+Kolom password diubah menjadi 'Text'
+---------------------------------------
+ALTER TABLE public.email_sender ALTER COLUMN "password" TYPE text USING "password"::text ;
+ALTER TABLE public.email_sender ALTER COLUMN "password" SET NOT NULL ;
+ALTER TABLE public.email_sender ALTER COLUMN "password" DROP DEFAULT ;
+---------------------------------------
+
 
 EDIT TABLE email_template_category
 =====================================
