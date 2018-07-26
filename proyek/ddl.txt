@@ -1,9 +1,10 @@
 DDL
 
----Reset Sequence---
+-----Reset Sequence-----
+
 alter sequence public.email_sender_id_seq restart with 1;
 
-----------------------------
+---------------------------------------------------------------------------------------------------------
 
 DDL - Email Sender
 =======================================
@@ -19,19 +20,15 @@ CREATE TABLE public.email_sender (
 	CONSTRAINT email_sender_pkey PRIMARY KEY (id)
 )
 
-EDIT table emal_sender
-=====================================
-ALTER TABLE public.email_sender ALTER COLUMN "password" TYPE text USING "password"::text ;
-ALTER TABLE public.email_sender ALTER COLUMN "password" SET NOT NULL ;
-ALTER TABLE public.email_sender ALTER COLUMN "password" DROP DEFAULT ;
----------------------------------------
-
-
 EDIT TABLE email_template_category
 =====================================
 ALTER TABLE public.email_template_category ALTER COLUMN id TYPE int8 USING id::int8 ;
 ALTER TABLE public.email_template_category ADD description varchar(255) NULL ;
 ALTER TABLE public.email_template_category ALTER COLUMN active SET DEFAULT true ;
+
+ADD DEFAULT email_template_category
+-------------
+INSERT INTO public.email_template_category VALUES (0, "No Category", true, "");
 
 
 DDL - EMAIL HISTORY
@@ -53,9 +50,6 @@ CREATE TABLE public.email_history (
 	CONSTRAINT email_history_email_sender_fk FOREIGN KEY (sender_id) REFERENCES public.email_sender(id),
 	CONSTRAINT email_history_email_template_category_fk FOREIGN KEY (email_template_category_id) REFERENCES public.email_template_category(id) ON DELETE CASCADE ON UPDATE CASCADE
 )
-WITH (
-	OIDS=FALSE
-) ;
 
 
 EDIT TABLE email_template
@@ -65,21 +59,19 @@ ALTER TABLE public.email_template DROP CONSTRAINT email_template_type_id_fkey ;
 ALTER TABLE public.email_template DROP COLUMN tenant_type_id ;
 ALTER TABLE public.email_template DROP COLUMN active ;
 ALTER TABLE public.email_template ADD sender_id int8 NULL ;
-ALTER TABLE public.email_template ADD created_date date NULL ;
+ALTER TABLE public.email_template ADD modified_date date NULL ;
 ALTER TABLE public.email_template ADD CONSTRAINT email_template_email_sender_fk FOREIGN KEY (sender_id) REFERENCES public.email_sender(id) ;
 
-EDIT email_recipient
+DROP TABLE email_recipient
 ========================================
-ALTER TABLE public.email_recipient DROP CONSTRAINT email_recipient_customer_id_fkey ;
-ALTER TABLE public.email_recipient DROP CONSTRAINT email_recipient_period_type_id_fkey ;
-ALTER TABLE public.email_recipient DROP COLUMN customer_id ;
-ALTER TABLE public.email_recipient DROP COLUMN initial_date ;
-ALTER TABLE public.email_recipient DROP COLUMN delivery_date ;
-ALTER TABLE public.email_recipient DROP COLUMN period_duration ;
-ALTER TABLE public.email_recipient DROP COLUMN period_type_id ;
-ALTER TABLE public.email_recipient DROP COLUMN active ;
-ALTER TABLE public.email_recipient ADD customer_cp_id int8 NOT NULL ;
-ALTER TABLE public.email_recipient ADD CONSTRAINT email_recipient_customer_cp_fk FOREIGN KEY (customer_cp_id) REFERENCES public.customer_cp(id) ;
+DROP TABLE email_recipient;
 
+--------------------------------------------------------------------------------------------------------
+TAMBAHAN
 
-INSERT INTO public.email_template_category VALUES (0, "No Category", true, "");
+EDIT table email_sender => type data jadi text
+========================================
+ALTER TABLE public.email_sender ALTER COLUMN "password" TYPE text USING "password"::text ;
+ALTER TABLE public.email_sender ALTER COLUMN "password" SET NOT NULL ;
+ALTER TABLE public.email_sender ALTER COLUMN "password" DROP DEFAULT ;
+--------------------------------------------------------------------------------------------------------
