@@ -18,8 +18,9 @@ CREATE TABLE public.email_sender (
 	ssl bool NOT NULL,
 	CONSTRAINT email_sender_pkey PRIMARY KEY (id)
 )
-Kolom password diubah menjadi 'Text'
----------------------------------------
+
+EDIT table emal_sender
+=====================================
 ALTER TABLE public.email_sender ALTER COLUMN "password" TYPE text USING "password"::text ;
 ALTER TABLE public.email_sender ALTER COLUMN "password" SET NOT NULL ;
 ALTER TABLE public.email_sender ALTER COLUMN "password" DROP DEFAULT ;
