@@ -81,3 +81,5 @@ ALTER TABLE public.email_recipient DROP COLUMN active ;
 ALTER TABLE public.email_recipient ADD customer_cp_id int8 NOT NULL ;
 ALTER TABLE public.email_recipient ADD CONSTRAINT email_recipient_customer_cp_fk FOREIGN KEY (customer_cp_id) REFERENCES public.customer_cp(id) ;
 
+
+INSERT INTO public.email_template_category VALUES (0, "No Category", true, "");
