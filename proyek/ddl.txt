@@ -1,0 +1,90 @@
+DDL
+
+-----Reset Sequence-----
+
+alter sequence public.email_sender_id_seq restart with 1;
+
+---------------------------------------------------------------------------------------------------------
+
+DDL - Email Sender
+=======================================
+CREATE SEQUENCE email_sender_id_seq;
+
+CREATE TABLE public.email_sender (
+	id int8 NOT NULL DEFAULT nextval('email_sender_id_seq'::regclass),
+	email varchar(255) NOT NULL,
+	password text NOT NULL,
+	host varchar(255) NOT NULL,
+	port int4 NOT NULL,
+	ssl bool NOT NULL,
+	CONSTRAINT email_sender_pkey PRIMARY KEY (id)
+)
+
+EDIT TABLE email_template_category
+=====================================
+ALTER TABLE public.email_template_category ALTER COLUMN id TYPE int8 USING id::int8 ;
+ALTER TABLE public.email_template_category ADD description varchar(255) NULL ;
+ALTER TABLE public.email_template_category ALTER COLUMN active SET DEFAULT true ;
+
+ADD DEFAULT email_template_category
+-------------
+INSERT INTO public.email_template_category VALUES (0, 'No Category', true, '');
+
+
+DDL - EMAIL HISTORY
+=====================================
+CREATE SEQUENCE email_history_id_seq;
+CREATE TABLE public.email_history (
+	id int8 NOT NULL DEFAULT nextval('email_history_id_seq'::regclass),
+	to_recipient text NOT NULL,
+	bcc text NULL,
+	cc text NULL,
+	subject varchar(255) NOT NULL,
+	body text NULL,
+	sent_date date NOT NULL,
+	sent_time time NOT NULL,
+	email_template_category_id int8 NULL DEFAULT 0,
+	sender_id int8 NOT NULL,
+	sent bool NOT NULL DEFAULT FALSE,
+	CONSTRAINT email_history_pk PRIMARY KEY (id),
+	CONSTRAINT email_history_email_sender_fk FOREIGN KEY (sender_id) REFERENCES public.email_sender(id),
+	CONSTRAINT email_history_email_template_category_fk FOREIGN KEY (email_template_category_id) REFERENCES public.email_template_category(id) ON DELETE CASCADE ON UPDATE CASCADE
+)
+
+
+EDIT TABLE email_template
+========================================
+ALTER TABLE public.email_template DROP CONSTRAINT email_template_type_id_fkey ;
+
+ALTER TABLE public.email_template DROP COLUMN tenant_type_id ;
+ALTER TABLE public.email_template DROP COLUMN active ;
+ALTER TABLE public.email_template ADD sender_id int8 NOT NULL ;
+ALTER TABLE public.email_template ADD modified_date date NULL ;
+ALTER TABLE public.email_template ADD CONSTRAINT email_template_email_sender_fk FOREIGN KEY (sender_id) REFERENCES public.email_sender(id) ;
+
+DROP TABLE email_recipient
+========================================
+DROP TABLE email_recipient;
+
+--------------------------------------------------------------------------------------------------------
+TAMBAHAN
+
+EDIT table email_sender => type data jadi text
+========================================
+ALTER TABLE public.email_sender ALTER COLUMN "password" TYPE text USING "password"::text ;
+ALTER TABLE public.email_sender ALTER COLUMN "password" SET NOT NULL ;
+ALTER TABLE public.email_sender ALTER COLUMN "password" DROP DEFAULT ;
+
+EDIT table email_history => set default at email_template_category_id
+========================================
+ALTER TABLE public.email_history ALTER COLUMN email_template_category_id TYPE int8 USING email_template_category_id::int8 ;
+ALTER TABLE public.email_history ALTER COLUMN email_template_category_id DROP NOT NULL ;
+ALTER TABLE public.email_history ALTER COLUMN email_template_category_id SET DEFAULT 0 ;
+
+SET NOT NULL at sender_id (email_template)
+========================================
+ALTER TABLE public.email_template ALTER COLUMN sender_id TYPE int8 USING sender_id::int8 ;
+ALTER TABLE public.email_template ALTER COLUMN sender_id SET NOT NULL ;
+ALTER TABLE public.email_template ALTER COLUMN sender_id DROP DEFAULT ;
+
+--------------------------------------------------------------------------------------------------------
