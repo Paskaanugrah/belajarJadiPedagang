@@ -87,4 +87,14 @@ ALTER TABLE public.email_template ALTER COLUMN sender_id TYPE int8 USING sender_
 ALTER TABLE public.email_template ALTER COLUMN sender_id SET NOT NULL ;
 ALTER TABLE public.email_template ALTER COLUMN sender_id DROP DEFAULT ;
 
+MENGGANTI FOREIGN KEY PADA EMAIL HISTORY (dg email sender)
+========================================
+ALTER TABLE public.email_history DROP CONSTRAINT email_history_email_sender_fk ;
+ALTER TABLE public.email_history ADD CONSTRAINT email_history_email_sender_fk FOREIGN KEY (sender_id) REFERENCES public.email_sender(id) ON DELETE CASCADE ON UPDATE CASCADE ;
+
+MENGGANTI FOREIGN KEY PADA EMAIL TEMPLATE (dg email sender)
+========================================
+ALTER TABLE public.email_template DROP CONSTRAINT email_template_email_sender_fk ;
+ALTER TABLE public.email_template ADD CONSTRAINT email_template_email_sender_fk FOREIGN KEY (sender_id) REFERENCES public.email_sender(id) ON DELETE CASCADE ON UPDATE CASCADE ;
+
 --------------------------------------------------------------------------------------------------------
