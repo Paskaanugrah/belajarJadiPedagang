@@ -20,8 +20,13 @@ CREATE TABLE public.email_sender (
 	CONSTRAINT email_sender_pkey PRIMARY KEY (id)
 )
 
+<<<<<<< HEAD
 tambah column active --> email_sender
 ===================
+=======
+tambah column active => email_sender
+=====================================
+>>>>>>> b51af5ce55743f6996360126c3302f272b7a9578
 ALTER TABLE public.email_sender ADD active bool NOT NULL ;
 
 EDIT TABLE email_template_category
