@@ -20,6 +20,10 @@ CREATE TABLE public.email_sender (
 	CONSTRAINT email_sender_pkey PRIMARY KEY (id)
 )
 
+tambah column active --> email_sender
+===================
+ALTER TABLE public.email_sender ADD active bool NOT NULL ;
+
 EDIT TABLE email_template_category
 =====================================
 ALTER TABLE public.email_template_category ALTER COLUMN id TYPE int8 USING id::int8 ;
@@ -86,5 +90,15 @@ SET NOT NULL at sender_id (email_template)
 ALTER TABLE public.email_template ALTER COLUMN sender_id TYPE int8 USING sender_id::int8 ;
 ALTER TABLE public.email_template ALTER COLUMN sender_id SET NOT NULL ;
 ALTER TABLE public.email_template ALTER COLUMN sender_id DROP DEFAULT ;
+
+MENGGANTI FOREIGN KEY PADA EMAIL HISTORY (dg email sender)
+========================================
+ALTER TABLE public.email_history DROP CONSTRAINT email_history_email_sender_fk ;
+ALTER TABLE public.email_history ADD CONSTRAINT email_history_email_sender_fk FOREIGN KEY (sender_id) REFERENCES public.email_sender(id) ON DELETE CASCADE ON UPDATE CASCADE ;
+
+MENGGANTI FOREIGN KEY PADA EMAIL TEMPLATE (dg email sender)
+========================================
+ALTER TABLE public.email_template DROP CONSTRAINT email_template_email_sender_fk ;
+ALTER TABLE public.email_template ADD CONSTRAINT email_template_email_sender_fk FOREIGN KEY (sender_id) REFERENCES public.email_sender(id) ON DELETE CASCADE ON UPDATE CASCADE ;
 
 --------------------------------------------------------------------------------------------------------

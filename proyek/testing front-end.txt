@@ -1,0 +1,11 @@
+fe :
+pagination
+
+delete -> yes/no
+
+edit -> data apa dimunculkan
+
+protocol -> toggle
+
+delete email sender -> database tidak terhapus
+
