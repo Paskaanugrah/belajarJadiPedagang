@@ -1,11 +1,11 @@
 fe :
-pagination
+pagination [done]
 
-delete -> yes/no
+delete -> yes/no [done]
 
-edit -> data apa dimunculkan
+edit -> data apa dimunculkan [done]
 
-protocol -> toggle
+protocol -> toggle [katanya sprint 2?] wkwk
 
-delete email sender -> database tidak terhapus
+delete email sender -> database tidak terhapus [done, sudah diganti active inactive] 
 
