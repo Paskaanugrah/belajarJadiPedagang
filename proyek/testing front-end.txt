@@ -9,3 +9,7 @@ protocol -> toggle [katanya sprint 2?] wkwk
 
 delete email sender -> database tidak terhapus [done, sudah diganti active inactive] 
 
+-------------------------------------------
+
+
+
